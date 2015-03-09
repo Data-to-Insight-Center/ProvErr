@@ -1,0 +1,69 @@
+which: no hadoop in (/home/iub_netkarma/pig-0.12.0/bin:/usr/local/bin:/bin:/usr/bin:/home/iub_netkarma/bin)
+Warning: $HADOOP_HOME is deprecated.
+
+2014-10-17 02:49:35,451 [main] INFO  org.apache.pig.Main - Apache Pig version 0.12.0 (r1529718) compiled Oct 07 2013, 12:20:14
+2014-10-17 02:49:35,452 [main] INFO  org.apache.pig.Main - Logging error messages to: /home/iub_netkarma/Group2/pig_1413514175441.log
+2014-10-17 02:49:36,291 [main] INFO  org.apache.pig.impl.util.Utils - Default bootup file /home/iub_netkarma/.pigbootup not found
+2014-10-17 02:49:37,276 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://planetlab2.acis.ufl.edu:14000
+2014-10-17 02:49:38,249 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to map-reduce job tracker at: planetlab2.acis.ufl.edu:14001
+2014-10-17 02:49:40,385 [main] INFO  org.apache.pig.tools.pigstats.ScriptState - Pig features used in the script: UNKNOWN
+2014-10-17 02:49:40,504 [main] INFO  org.apache.pig.newplan.logical.optimizer.LogicalPlanOptimizer - {RULES_ENABLED=[AddForEach, ColumnMapKeyPrune, DuplicateForEachColumnRewrite, GroupByConstParallelSetter, ImplicitSplitInserter, LimitOptimizer, LoadTypeCastInserter, MergeFilter, MergeForEach, NewPartitionFilterOptimizer, PartitionFilterOptimizer, PushDownForEachFlatten, PushUpFilter, SplitFilter, StreamTypeCastInserter], RULES_DISABLED=[FilterLogicExpressionSimplifier]}
+2014-10-17 02:49:40,557 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for movies: $0, $3, $4
+2014-10-17 02:49:40,842 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler - File concatenation threshold: 100 optimistic? false
+2014-10-17 02:49:41,010 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size before optimization: 1
+2014-10-17 02:49:41,010 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size after optimization: 1
+2014-10-17 02:49:41,312 [main] INFO  org.apache.pig.tools.pigstats.ScriptState - Pig script settings are added to the job
+2014-10-17 02:49:41,403 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - mapred.job.reduce.markreset.buffer.percent is not set, set to default 0.3
+2014-10-17 02:49:43,006 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - creating jar file Job8246139701692903681.jar
+2014-10-17 02:49:55,035 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - jar file Job8246139701692903681.jar created
+2014-10-17 02:49:55,096 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - Setting up single store job
+2014-10-17 02:49:55,127 [main] INFO  org.apache.pig.data.SchemaTupleFrontend - Key [pig.schematuple] is false, will not generate code.
+2014-10-17 02:49:55,133 [main] INFO  org.apache.pig.data.SchemaTupleFrontend - Starting process to move generated code to distributed cache
+2014-10-17 02:49:55,133 [main] INFO  org.apache.pig.data.SchemaTupleFrontend - Setting key [pig.schematuple.classes] with classes to deserialize []
+2014-10-17 02:49:55,133 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - Map only job, skipping reducer estimation
+2014-10-17 02:49:55,316 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 1 map-reduce job(s) waiting for submission.
+2014-10-17 02:49:55,819 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 0% complete
+2014-10-17 02:50:10,094 [JobControl] INFO  org.apache.hadoop.mapreduce.lib.input.FileInputFormat - Total input paths to process : 1
+2014-10-17 02:50:10,094 [JobControl] INFO  org.apache.pig.backend.hadoop.executionengine.util.MapRedUtil - Total input paths to process : 1
+2014-10-17 02:50:10,137 [JobControl] INFO  org.apache.hadoop.util.NativeCodeLoader - Loaded the native-hadoop library
+2014-10-17 02:50:10,137 [JobControl] WARN  org.apache.hadoop.io.compress.snappy.LoadSnappy - Snappy native library not loaded
+2014-10-17 02:50:10,140 [JobControl] INFO  org.apache.pig.backend.hadoop.executionengine.util.MapRedUtil - Total input paths (combined) to process : 2
+2014-10-17 02:50:21,500 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - HadoopJobId: job_201410170127_0023
+2014-10-17 02:50:21,500 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - Processing aliases movies,movies_concat
+2014-10-17 02:50:21,500 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - detailed locations: M: movies[24,9],movies_concat[27,16] C:  R: 
+2014-10-17 02:50:21,500 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - More information at: http://planetlab2.acis.ufl.edu:50030/jobdetails.jsp?jobid=job_201410170127_0023
+2014-10-17 02:51:37,014 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - job job_201410170127_0023 has failed! Stop running all dependent jobs
+2014-10-17 02:51:37,021 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 100% complete
+2014-10-17 02:51:37,034 [main] ERROR org.apache.pig.tools.pigstats.SimplePigStats - ERROR: 46
+2014-10-17 02:51:37,034 [main] ERROR org.apache.pig.tools.pigstats.PigStatsUtil - 1 map reduce job(s) failed!
+2014-10-17 02:51:37,037 [main] INFO  org.apache.pig.tools.pigstats.SimplePigStats - Script Statistics: 
+
+HadoopVersion	PigVersion	UserId	StartedAt	FinishedAt	Features
+1.2.1	0.12.0	iub_netkarma	2014-10-17 02:49:41	2014-10-17 02:51:37	UNKNOWN
+
+Failed!
+
+Failed Jobs:
+JobId	Alias	Feature	Message	Outputs
+job_201410170127_0023	movies,movies_concat	MAP_ONLY	Message: Job failed! Error - # of failed Map Tasks exceeded allowed limit. FailedCount: 1. LastFailedTask: task_201410170127_0023_m_000000	hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/concat-e-store-results,
+
+Input(s):
+Failed to read data from "hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/dataset"
+
+Output(s):
+Failed to produce result in "hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/concat-e-store-results"
+
+Counters:
+Total records written : 0
+Total bytes written : 0
+Spillable Memory Manager spill count : 0
+Total bags proactively spilled: 0
+Total records proactively spilled: 0
+
+Job DAG:
+job_201410170127_0023
+
+
+2014-10-17 02:51:37,037 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - Failed!
+2014-10-17 02:51:37,084 [main] ERROR org.apache.pig.tools.grunt.GruntParser - ERROR 2999: Unexpected internal error. 46
+Details at logfile: /home/iub_netkarma/Group2/pig_1413514175441.log

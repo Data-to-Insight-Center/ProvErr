@@ -1,0 +1,71 @@
+2014-10-15 22:30:49,695 [main] INFO  org.apache.pig.Main - Apache Pig version 0.12.0 (r1529718) compiled Oct 07 2013, 12:20:14
+2014-10-15 22:30:49,696 [main] INFO  org.apache.pig.Main - Logging error messages to: /home/peng/workspace/ProvErr/new-Group1/pig_1413426649694.log
+2014-10-15 22:30:49,904 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://localhost:9000
+2014-10-15 22:30:50,464 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to map-reduce job tracker at: localhost:9001
+2014-10-15 22:30:50,556 [main] WARN  org.apache.pig.tools.grunt.GruntParser - 'fs' statement is ignored while processing 'explain -script' or '-check'
+2014-10-15 22:30:51,024 [main] WARN  org.apache.pig.PigServer - Encountered Warning USING_OVERLOADED_FUNCTION 1 time(s).
+2014-10-15 22:30:51,024 [main] WARN  org.apache.pig.PigServer - Encountered Warning IMPLICIT_CAST_TO_CHARARRAY 1 time(s).
+2014-10-15 22:30:51,079 [main] INFO  org.apache.pig.newplan.logical.optimizer.LogicalPlanOptimizer - {RULES_ENABLED=[AddForEach, ColumnMapKeyPrune, DuplicateForEachColumnRewrite, GroupByConstParallelSetter, ImplicitSplitInserter, LimitOptimizer, LoadTypeCastInserter, MergeFilter, MergeForEach, NewPartitionFilterOptimizer, PartitionFilterOptimizer, PushDownForEachFlatten, PushUpFilter, SplitFilter, StreamTypeCastInserter], RULES_DISABLED=[FilterLogicExpressionSimplifier]}
+2014-10-15 22:30:51,097 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for movies: $0, $2, $3, $4
+#-----------------------------------------------
+# New Logical Plan:
+#-----------------------------------------------
+name_lastIndex: (Name: LOStore Schema: #11:int)ColumnPrune:InputUids=[11]ColumnPrune:OutputUids=[11]
+|
+|---name_lastIndex: (Name: LOForEach Schema: #11:int)ColumnPrune:InputUids=[2]ColumnPrune:OutputUids=[11]
+    |   |
+    |   (Name: LOGenerate[false] Schema: #11:int)ColumnPrune:InputUids=[2]ColumnPrune:OutputUids=[11]
+    |   |   |
+    |   |   (Name: UserFunc(org.apache.pig.builtin.LAST_INDEX_OF) Type: int Uid: 11)
+    |   |   |
+    |   |   |---(Name: Cast Type: chararray Uid: 2)
+    |   |   |   |
+    |   |   |   |---name:(Name: Project Type: bytearray Uid: 2 Input: 0 Column: (*))
+    |   |   |
+    |   |   |---(Name: Constant Type: chararray Uid: 10)
+    |   |
+    |   |---(Name: LOInnerLoad[0] Schema: name#2:bytearray)
+    |
+    |---movies: (Name: LOLoad Schema: name#2:bytearray)ColumnPrune:RequiredColumns=[1]ColumnPrune:InputUids=[2]ColumnPrune:OutputUids=[2]RequiredFields:[1]
+
+#-----------------------------------------------
+# Physical Plan:
+#-----------------------------------------------
+name_lastIndex: Store(hdfs://localhost:9000/user/peng/results:PigStorage) - scope-7
+|
+|---name_lastIndex: New For Each(false)[bag] - scope-6
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.LAST_INDEX_OF)[int] - scope-4
+    |   |
+    |   |---Cast[chararray] - scope-2
+    |   |   |
+    |   |   |---Project[bytearray][0] - scope-1
+    |   |
+    |   |---Constant(a) - scope-3
+    |
+    |---movies: Load(hdfs://localhost:9000/user/peng/dataset-clean:PigStorage(',')) - scope-0
+
+2014-10-15 22:30:51,204 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler - File concatenation threshold: 100 optimistic? false
+2014-10-15 22:30:51,223 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size before optimization: 1
+2014-10-15 22:30:51,223 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size after optimization: 1
+#--------------------------------------------------
+# Map Reduce Plan                                  
+#--------------------------------------------------
+MapReduce node scope-8
+Map Plan
+name_lastIndex: Store(hdfs://localhost:9000/user/peng/results:PigStorage) - scope-7
+|
+|---name_lastIndex: New For Each(false)[bag] - scope-6
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.LAST_INDEX_OF)[int] - scope-4
+    |   |
+    |   |---Cast[chararray] - scope-2
+    |   |   |
+    |   |   |---Project[bytearray][0] - scope-1
+    |   |
+    |   |---Constant(a) - scope-3
+    |
+    |---movies: Load(hdfs://localhost:9000/user/peng/dataset-clean:PigStorage(',')) - scope-0--------
+Global sort: false
+----------------
+

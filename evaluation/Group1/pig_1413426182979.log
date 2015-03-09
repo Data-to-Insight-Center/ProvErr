@@ -1,0 +1,33 @@
+Backend error message
+---------------------
+java.lang.ArrayIndexOutOfBoundsException: 46
+	at org.apache.pig.error.PigStorage.getNext(Unknown Source)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigRecordReader.nextKeyValue(PigRecordReader.java:211)
+	at org.apache.hadoop.mapred.MapTask$NewTrackingRecordReader.nextKeyValue(MapTask.java:531)
+	at org.apache.hadoop.mapreduce.MapContext.nextKeyValue(MapContext.java:67)
+	at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:144)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:364)
+	at org.apache.hadoop.mapred.Child$4.run(Child.java:255)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:415)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1190)
+	at org.apache.hadoop.mapred.Child.main(Child.java:249)
+
+Pig Stack Trace
+---------------
+ERROR 2999: Unexpected internal error. 46
+
+java.lang.ArrayIndexOutOfBoundsException: 46
+	at org.apache.pig.error.PigStorage.getNext(Unknown Source)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigRecordReader.nextKeyValue(PigRecordReader.java:211)
+	at org.apache.hadoop.mapred.MapTask$NewTrackingRecordReader.nextKeyValue(MapTask.java:531)
+	at org.apache.hadoop.mapreduce.MapContext.nextKeyValue(MapContext.java:67)
+	at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:144)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:364)
+	at org.apache.hadoop.mapred.Child$4.run(Child.java:255)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:415)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1190)
+================================================================================

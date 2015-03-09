@@ -1,0 +1,129 @@
+2014-10-15 22:34:52,205 [main] INFO  org.apache.pig.Main - Apache Pig version 0.12.0 (r1529718) compiled Oct 07 2013, 12:20:14
+2014-10-15 22:34:52,205 [main] INFO  org.apache.pig.Main - Logging error messages to: /home/peng/workspace/ProvErr/new-Group1/pig_1413426892203.log
+2014-10-15 22:34:52,396 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://localhost:9000
+2014-10-15 22:34:52,811 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to map-reduce job tracker at: localhost:9001
+2014-10-15 22:34:52,949 [main] WARN  org.apache.pig.tools.grunt.GruntParser - 'fs' statement is ignored while processing 'explain -script' or '-check'
+2014-10-15 22:34:53,616 [main] INFO  org.apache.pig.newplan.logical.optimizer.LogicalPlanOptimizer - {RULES_ENABLED=[AddForEach, ColumnMapKeyPrune, DuplicateForEachColumnRewrite, GroupByConstParallelSetter, ImplicitSplitInserter, LimitOptimizer, LoadTypeCastInserter, MergeFilter, MergeForEach, NewPartitionFilterOptimizer, PartitionFilterOptimizer, PushDownForEachFlatten, PushUpFilter, SplitFilter, StreamTypeCastInserter], RULES_DISABLED=[FilterLogicExpressionSimplifier]}
+2014-10-15 22:34:53,636 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for A: $2, $3, $4
+2014-10-15 22:34:53,636 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for B: $1, $3, $4
+#-----------------------------------------------
+# New Logical Plan:
+#-----------------------------------------------
+C_check: (Name: LOStore Schema: A::a_id#1:bytearray,#16:bytearray)ColumnPrune:InputUids=[16, 1]ColumnPrune:OutputUids=[16, 1]
+|
+|---C_check: (Name: LOForEach Schema: A::a_id#1:bytearray,#16:bytearray)ColumnPrune:InputUids=[1, 2, 8]ColumnPrune:OutputUids=[1, 16]
+    |   |
+    |   (Name: LOGenerate[false,false] Schema: A::a_id#1:bytearray,#16:bytearray)ColumnPrune:InputUids=[1, 2, 8]ColumnPrune:OutputUids=[1, 16]
+    |   |   |
+    |   |   A::a_id:(Name: Project Type: bytearray Uid: 1 Input: 0 Column: (*))
+    |   |   |
+    |   |   (Name: UserFunc(org.apache.pig.error.CheckNameYear) Type: bytearray Uid: 16)
+    |   |   |
+    |   |   |---(Name: Cast Type: chararray Uid: 2)
+    |   |   |   |
+    |   |   |   |---A::a_name:(Name: Project Type: bytearray Uid: 2 Input: 1 Column: (*))
+    |   |   |
+    |   |   |---(Name: Cast Type: int Uid: 8)
+    |   |       |
+    |   |       |---B::b_year:(Name: Project Type: bytearray Uid: 8 Input: 2 Column: (*))
+    |   |
+    |   |---(Name: LOInnerLoad[0] Schema: A::a_id#1:bytearray)
+    |   |
+    |   |---(Name: LOInnerLoad[1] Schema: A::a_name#2:bytearray)
+    |   |
+    |   |---(Name: LOInnerLoad[3] Schema: B::b_year#8:bytearray)
+    |
+    |---C: (Name: LOJoin(HASH) Schema: A::a_id#1:bytearray,A::a_name#2:bytearray,B::b_id#6:bytearray,B::b_year#8:bytearray)ColumnPrune:InputUids=[1, 2, 6, 8]ColumnPrune:OutputUids=[1, 2, 8]
+        |   |
+        |   a_id:(Name: Project Type: bytearray Uid: 1 Input: 0 Column: 0)
+        |   |
+        |   b_id:(Name: Project Type: bytearray Uid: 6 Input: 1 Column: 0)
+        |
+        |---A: (Name: LOLoad Schema: a_id#1:bytearray,a_name#2:bytearray)ColumnPrune:RequiredColumns=[0, 1]ColumnPrune:InputUids=[1, 2]ColumnPrune:OutputUids=[1, 2]RequiredFields:[0, 1]
+        |
+        |---B: (Name: LOLoad Schema: b_id#6:bytearray,b_year#8:bytearray)ColumnPrune:RequiredColumns=[0, 2]ColumnPrune:InputUids=[6, 8]ColumnPrune:OutputUids=[6, 8]RequiredFields:[0, 2]
+
+#-----------------------------------------------
+# Physical Plan:
+#-----------------------------------------------
+C_check: Store(hdfs://localhost:9000/user/peng/results:PigStorage) - scope-23
+|
+|---C_check: New For Each(false,false)[bag] - scope-22
+    |   |
+    |   Project[bytearray][0] - scope-13
+    |   |
+    |   POUserFunc(org.apache.pig.error.CheckNameYear)[bytearray] - scope-19
+    |   |
+    |   |---Cast[chararray] - scope-16
+    |   |   |
+    |   |   |---Project[bytearray][1] - scope-15
+    |   |
+    |   |---Cast[int] - scope-18
+    |       |
+    |       |---Project[bytearray][3] - scope-17
+    |
+    |---C: New For Each(true,true)[tuple] - scope-12
+        |   |
+        |   Project[bag][1] - scope-10
+        |   |
+        |   Project[bag][2] - scope-11
+        |
+        |---C: Package[tuple]{bytearray} - scope-5
+            |
+            |---C: Global Rearrange[tuple] - scope-4
+                |
+                |---C: Local Rearrange[tuple]{bytearray}(false) - scope-6
+                |   |   |
+                |   |   Project[bytearray][0] - scope-7
+                |   |
+                |   |---A: Load(hdfs://localhost:9000/user/peng/dataset-clean:PigStorage(',')) - scope-0
+                |
+                |---C: Local Rearrange[tuple]{bytearray}(false) - scope-8
+                    |   |
+                    |   Project[bytearray][0] - scope-9
+                    |
+                    |---B: Load(hdfs://localhost:9000/user/peng/dataset-clean:PigStorage(',')) - scope-1
+
+2014-10-15 22:34:53,768 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler - File concatenation threshold: 100 optimistic? false
+2014-10-15 22:34:53,843 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler$LastInputStreamingOptimizer - Rewrite: POPackage->POForEach to POJoinPackage
+2014-10-15 22:34:53,860 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size before optimization: 1
+2014-10-15 22:34:53,861 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size after optimization: 1
+#--------------------------------------------------
+# Map Reduce Plan                                  
+#--------------------------------------------------
+MapReduce node scope-26
+Map Plan
+Union[tuple] - scope-27
+|
+|---C: Local Rearrange[tuple]{bytearray}(false) - scope-6
+|   |   |
+|   |   Project[bytearray][0] - scope-7
+|   |
+|   |---A: Load(hdfs://localhost:9000/user/peng/dataset-clean:PigStorage(',')) - scope-0
+|
+|---C: Local Rearrange[tuple]{bytearray}(false) - scope-8
+    |   |
+    |   Project[bytearray][0] - scope-9
+    |
+    |---B: Load(hdfs://localhost:9000/user/peng/dataset-clean:PigStorage(',')) - scope-1--------
+Reduce Plan
+C_check: Store(hdfs://localhost:9000/user/peng/results:PigStorage) - scope-23
+|
+|---C_check: New For Each(false,false)[bag] - scope-22
+    |   |
+    |   Project[bytearray][0] - scope-13
+    |   |
+    |   POUserFunc(org.apache.pig.error.CheckNameYear)[bytearray] - scope-19
+    |   |
+    |   |---Cast[chararray] - scope-16
+    |   |   |
+    |   |   |---Project[bytearray][1] - scope-15
+    |   |
+    |   |---Cast[int] - scope-18
+    |       |
+    |       |---Project[bytearray][3] - scope-17
+    |
+    |---POJoinPackage(true,true)[tuple] - scope-28--------
+Global sort: false
+----------------
+

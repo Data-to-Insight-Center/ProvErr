@@ -1,0 +1,51 @@
+Backend error message
+---------------------
+org.apache.pig.backend.executionengine.ExecException: ERROR 2106: Error while computing concat in CheckNameYear
+	at org.apache.pig.error.CheckNameYear.exec(Unknown Source)
+	at org.apache.pig.error.CheckNameYear.exec(Unknown Source)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNext(POUserFunc.java:330)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNextDataByteArray(POUserFunc.java:391)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.getNext(PhysicalOperator.java:313)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.processPlan(POForEach.java:378)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.getNextTuple(POForEach.java:298)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapReduce$Reduce.runPipeline(PigGenericMapReduce.java:464)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapReduce$Reduce.processOnePackageOutput(PigGenericMapReduce.java:432)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapReduce$Reduce.reduce(PigGenericMapReduce.java:404)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapReduce$Reduce.reduce(PigGenericMapReduce.java:256)
+	at org.apache.hadoop.mapreduce.Reducer.run(Reducer.java:177)
+	at org.apache.hadoop.mapred.ReduceTask.runNewReducer(ReduceTask.java:649)
+	at org.apache.hadoop.mapred.ReduceTask.run(ReduceTask.java:418)
+	at org.apache.hadoop.mapred.Child$4.run(Child.java:255)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:415)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1190)
+	at org.apache.hadoop.mapred.Child.main(Child.java:249)
+Caused by: java.lang.Exception: Both fields are empty
+	... 19 more
+
+Pig Stack Trace
+---------------
+ERROR 2106: Error while computing concat in CheckNameYear
+
+org.apache.pig.backend.executionengine.ExecException: ERROR 2106: Error while computing concat in CheckNameYear
+	at org.apache.pig.error.CheckNameYear.exec(Unknown Source)
+	at org.apache.pig.error.CheckNameYear.exec(Unknown Source)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNext(POUserFunc.java:330)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNextDataByteArray(POUserFunc.java:391)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.getNext(PhysicalOperator.java:313)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.processPlan(POForEach.java:378)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.getNextTuple(POForEach.java:298)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapReduce$Reduce.runPipeline(PigGenericMapReduce.java:464)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapReduce$Reduce.processOnePackageOutput(PigGenericMapReduce.java:432)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapReduce$Reduce.reduce(PigGenericMapReduce.java:404)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapReduce$Reduce.reduce(PigGenericMapReduce.java:256)
+	at org.apache.hadoop.mapreduce.Reducer.run(Reducer.java:177)
+	at org.apache.hadoop.mapred.ReduceTask.runNewReducer(ReduceTask.java:649)
+	at org.apache.hadoop.mapred.ReduceTask.run(ReduceTask.java:418)
+	at org.apache.hadoop.mapred.Child$4.run(Child.java:255)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:415)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1190)
+	at org.apache.hadoop.mapred.Child.main(Child.java:249)
+Caused by: java.lang.Exception: Both fields are empty
+================================================================================

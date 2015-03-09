@@ -1,0 +1,132 @@
+2014-10-15 22:31:23,940 [main] INFO  org.apache.pig.Main - Apache Pig version 0.12.0 (r1529718) compiled Oct 07 2013, 12:20:14
+2014-10-15 22:31:23,942 [main] INFO  org.apache.pig.Main - Logging error messages to: /home/peng/workspace/ProvErr/new-Group1/pig_1413426683936.log
+2014-10-15 22:31:24,539 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://localhost:9000
+2014-10-15 22:31:26,594 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to map-reduce job tracker at: localhost:9001
+2014-10-15 22:31:27,897 [main] WARN  org.apache.pig.PigServer - Encountered Warning IMPLICIT_CAST_TO_CHARARRAY 1 time(s).
+2014-10-15 22:31:27,897 [main] WARN  org.apache.pig.PigServer - Encountered Warning USING_OVERLOADED_FUNCTION 1 time(s).
+2014-10-15 22:31:28,062 [main] INFO  org.apache.pig.newplan.logical.optimizer.LogicalPlanOptimizer - {RULES_ENABLED=[AddForEach, ColumnMapKeyPrune, DuplicateForEachColumnRewrite, GroupByConstParallelSetter, ImplicitSplitInserter, LimitOptimizer, LoadTypeCastInserter, MergeFilter, MergeForEach, NewPartitionFilterOptimizer, PartitionFilterOptimizer, PushDownForEachFlatten, PushUpFilter, SplitFilter, StreamTypeCastInserter], RULES_DISABLED=[FilterLogicExpressionSimplifier]}
+2014-10-15 22:31:28,126 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for movies: $0, $2, $4
+#-----------------------------------------------
+# New Logical Plan:
+#-----------------------------------------------
+name_avg: (Name: LOStore Schema: #42:bag{#41:tuple(lower_name#23:chararray)},#45:double)ColumnPrune:InputUids=[27, 30]ColumnPrune:OutputUids=[27, 30]
+|
+|---name_avg: (Name: LOForEach Schema: #42:bag{#41:tuple(lower_name#23:chararray)},#45:double)
+    |   |
+    |   (Name: LOGenerate[false,false] Schema: #42:bag{#41:tuple(lower_name#23:chararray)},#45:double)
+    |   |   |
+    |   |   (Name: Dereference Type: bag Uid: 42 Column:[0])
+    |   |   |
+    |   |   |---name_lower:(Name: Project Type: bag Uid: 24 Input: 0 Column: (*))
+    |   |   |
+    |   |   (Name: UserFunc(org.apache.pig.builtin.AVG) Type: double Uid: 45)
+    |   |   |
+    |   |   |---(Name: Dereference Type: bag Uid: 44 Column:[1])
+    |   |       |
+    |   |       |---name_lower:(Name: Project Type: bag Uid: 24 Input: 1 Column: (*))
+    |   |
+    |   |---name_lower: (Name: LOInnerLoad[1] Schema: lower_name#23:chararray,rating#4:bytearray)
+    |   |
+    |   |---name_lower: (Name: LOInnerLoad[1] Schema: lower_name#23:chararray,rating#4:bytearray)
+    |
+    |---name_group: (Name: LOCogroup Schema: group#23:chararray,name_lower#24:bag{#36:tuple(lower_name#23:chararray,rating#4:bytearray)})ColumnPrune:InputUids=[4, 23]ColumnPrune:OutputUids=[24]
+        |   |
+        |   lower_name:(Name: Project Type: chararray Uid: 23 Input: 0 Column: 0)
+        |
+        |---name_lower: (Name: LOForEach Schema: lower_name#23:chararray,rating#4:bytearray)ColumnPrune:InputUids=[2, 4]ColumnPrune:OutputUids=[4, 23]
+            |   |
+            |   (Name: LOGenerate[false,false] Schema: lower_name#23:chararray,rating#4:bytearray)ColumnPrune:InputUids=[2, 4]ColumnPrune:OutputUids=[4, 23]
+            |   |   |
+            |   |   (Name: UserFunc(org.apache.pig.builtin.LOWER) Type: chararray Uid: 23)
+            |   |   |
+            |   |   |---(Name: Cast Type: chararray Uid: 2)
+            |   |       |
+            |   |       |---name:(Name: Project Type: bytearray Uid: 2 Input: 0 Column: (*))
+            |   |   |
+            |   |   rating:(Name: Project Type: bytearray Uid: 4 Input: 1 Column: (*))
+            |   |
+            |   |---(Name: LOInnerLoad[0] Schema: name#2:bytearray)
+            |   |
+            |   |---(Name: LOInnerLoad[1] Schema: rating#4:bytearray)
+            |
+            |---movies: (Name: LOLoad Schema: name#2:bytearray,rating#4:bytearray)ColumnPrune:RequiredColumns=[1, 3]ColumnPrune:InputUids=[2, 4]ColumnPrune:OutputUids=[2, 4]RequiredFields:[1, 3]
+
+#-----------------------------------------------
+# Physical Plan:
+#-----------------------------------------------
+name_avg: Store(hdfs://localhost:9000/user/peng/lower-store-avg-results:PigStorage) - scope-20
+|
+|---name_avg: New For Each(false,false)[bag] - scope-19
+    |   |
+    |   Project[bag][0] - scope-13
+    |   |
+    |   |---Project[bag][1] - scope-12
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.AVG)[double] - scope-17
+    |   |
+    |   |---Project[bag][1] - scope-16
+    |       |
+    |       |---Project[bag][1] - scope-15
+    |
+    |---name_group: Package[tuple]{chararray} - scope-9
+        |
+        |---name_group: Global Rearrange[tuple] - scope-8
+            |
+            |---name_group: Local Rearrange[tuple]{chararray}(false) - scope-10
+                |   |
+                |   Project[chararray][0] - scope-11
+                |
+                |---name_lower: New For Each(false,false)[bag] - scope-7
+                    |   |
+                    |   POUserFunc(org.apache.pig.builtin.LOWER)[chararray] - scope-3
+                    |   |
+                    |   |---Cast[chararray] - scope-2
+                    |       |
+                    |       |---Project[bytearray][0] - scope-1
+                    |   |
+                    |   Project[bytearray][1] - scope-5
+                    |
+                    |---movies: Load(hdfs://localhost:9000/user/peng/dataset:PigStorage(',')) - scope-0
+
+2014-10-15 22:31:28,304 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler - File concatenation threshold: 100 optimistic? false
+2014-10-15 22:31:28,372 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size before optimization: 1
+2014-10-15 22:31:28,372 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size after optimization: 1
+#--------------------------------------------------
+# Map Reduce Plan                                  
+#--------------------------------------------------
+MapReduce node scope-21
+Map Plan
+name_group: Local Rearrange[tuple]{chararray}(false) - scope-10
+|   |
+|   Project[chararray][0] - scope-11
+|
+|---name_lower: New For Each(false,false)[bag] - scope-7
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.LOWER)[chararray] - scope-3
+    |   |
+    |   |---Cast[chararray] - scope-2
+    |       |
+    |       |---Project[bytearray][0] - scope-1
+    |   |
+    |   Project[bytearray][1] - scope-5
+    |
+    |---movies: Load(hdfs://localhost:9000/user/peng/dataset:PigStorage(',')) - scope-0--------
+Reduce Plan
+name_avg: Store(hdfs://localhost:9000/user/peng/lower-store-avg-results:PigStorage) - scope-20
+|
+|---name_avg: New For Each(false,false)[bag] - scope-19
+    |   |
+    |   Project[bag][0] - scope-13
+    |   |
+    |   |---Project[bag][1] - scope-12
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.AVG)[double] - scope-17
+    |   |
+    |   |---Project[bag][1] - scope-16
+    |       |
+    |       |---Project[bag][1] - scope-15
+    |
+    |---name_group: Package[tuple]{chararray} - scope-9--------
+Global sort: false
+----------------
+

@@ -1,0 +1,70 @@
+2014-10-15 22:24:48,529 [main] INFO  org.apache.pig.Main - Apache Pig version 0.12.0 (r1529718) compiled Oct 07 2013, 12:20:14
+2014-10-15 22:24:48,530 [main] INFO  org.apache.pig.Main - Logging error messages to: /home/peng/workspace/ProvErr/new-Group1/pig_1413426288527.log
+2014-10-15 22:24:49,024 [main] INFO  org.apache.pig.impl.util.Utils - Default bootup file /home/peng/.pigbootup not found
+2014-10-15 22:24:49,163 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://localhost:9000
+2014-10-15 22:24:49,412 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to map-reduce job tracker at: localhost:9001
+2014-10-15 22:24:49,978 [main] WARN  org.apache.pig.PigServer - Encountered Warning USING_OVERLOADED_FUNCTION 1 time(s).
+2014-10-15 22:24:49,978 [main] WARN  org.apache.pig.PigServer - Encountered Warning IMPLICIT_CAST_TO_CHARARRAY 1 time(s).
+2014-10-15 22:24:49,978 [main] WARN  org.apache.pig.PigServer - Encountered Warning IMPLICIT_CAST_TO_INT 1 time(s).
+2014-10-15 22:24:50,001 [main] INFO  org.apache.pig.tools.pigstats.ScriptState - Pig features used in the script: UNKNOWN
+2014-10-15 22:24:50,052 [main] INFO  org.apache.pig.newplan.logical.optimizer.LogicalPlanOptimizer - {RULES_ENABLED=[AddForEach, ColumnMapKeyPrune, DuplicateForEachColumnRewrite, GroupByConstParallelSetter, ImplicitSplitInserter, LimitOptimizer, LoadTypeCastInserter, MergeFilter, MergeForEach, NewPartitionFilterOptimizer, PartitionFilterOptimizer, PushDownForEachFlatten, PushUpFilter, SplitFilter, StreamTypeCastInserter], RULES_DISABLED=[FilterLogicExpressionSimplifier]}
+2014-10-15 22:24:50,068 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for movies: $0, $2, $4
+2014-10-15 22:24:50,176 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler - File concatenation threshold: 100 optimistic? false
+2014-10-15 22:24:50,196 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size before optimization: 1
+2014-10-15 22:24:50,196 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size after optimization: 1
+2014-10-15 22:24:50,256 [main] INFO  org.apache.pig.tools.pigstats.ScriptState - Pig script settings are added to the job
+2014-10-15 22:24:50,321 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - mapred.job.reduce.markreset.buffer.percent is not set, set to default 0.3
+2014-10-15 22:24:50,323 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - creating jar file Job7972651304913188852.jar
+2014-10-15 22:24:57,391 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - jar file Job7972651304913188852.jar created
+2014-10-15 22:24:57,412 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - Setting up single store job
+2014-10-15 22:24:57,420 [main] INFO  org.apache.pig.data.SchemaTupleFrontend - Key [pig.schematuple] is false, will not generate code.
+2014-10-15 22:24:57,420 [main] INFO  org.apache.pig.data.SchemaTupleFrontend - Starting process to move generated code to distributed cache
+2014-10-15 22:24:57,421 [main] INFO  org.apache.pig.data.SchemaTupleFrontend - Setting key [pig.schematuple.classes] with classes to deserialize []
+2014-10-15 22:24:57,421 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.JobControlCompiler - Map only job, skipping reducer estimation
+2014-10-15 22:24:57,471 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 1 map-reduce job(s) waiting for submission.
+2014-10-15 22:24:57,987 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 0% complete
+2014-10-15 22:24:58,239 [JobControl] INFO  org.apache.hadoop.mapreduce.lib.input.FileInputFormat - Total input paths to process : 1
+2014-10-15 22:24:58,240 [JobControl] INFO  org.apache.pig.backend.hadoop.executionengine.util.MapRedUtil - Total input paths to process : 1
+2014-10-15 22:24:58,291 [JobControl] INFO  org.apache.hadoop.util.NativeCodeLoader - Loaded the native-hadoop library
+2014-10-15 22:24:58,291 [JobControl] WARN  org.apache.hadoop.io.compress.snappy.LoadSnappy - Snappy native library not loaded
+2014-10-15 22:24:58,301 [JobControl] INFO  org.apache.pig.backend.hadoop.executionengine.util.MapRedUtil - Total input paths (combined) to process : 1
+2014-10-15 22:24:59,048 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - HadoopJobId: job_201410151714_0012
+2014-10-15 22:24:59,048 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - Processing aliases abs_upper_diff,movies
+2014-10-15 22:24:59,048 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - detailed locations: M: movies[21,9],abs_upper_diff[24,17] C:  R: 
+2014-10-15 22:24:59,048 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - More information at: http://localhost:50030/jobdetails.jsp?jobid=job_201410151714_0012
+2014-10-15 22:25:28,787 [main] WARN  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - Ooops! Some job has failed! Specify -stop_on_failure if you want Pig to stop immediately on failure.
+2014-10-15 22:25:28,787 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - job job_201410151714_0012 has failed! Stop running all dependent jobs
+2014-10-15 22:25:28,789 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 100% complete
+2014-10-15 22:25:28,831 [main] ERROR org.apache.pig.tools.pigstats.SimplePigStats - ERROR 0: Exception while executing [POUserFunc (Name: POUserFunc(org.apache.pig.builtin.IntAbs)[int] - scope-5 Operator Key: scope-5) children: null at []]: java.lang.NullPointerException
+2014-10-15 22:25:28,831 [main] ERROR org.apache.pig.tools.pigstats.PigStatsUtil - 1 map reduce job(s) failed!
+2014-10-15 22:25:28,835 [main] INFO  org.apache.pig.tools.pigstats.SimplePigStats - Script Statistics: 
+
+HadoopVersion	PigVersion	UserId	StartedAt	FinishedAt	Features
+1.2.2-SNAPSHOT	0.12.0	peng	2014-10-15 22:24:50	2014-10-15 22:25:28	UNKNOWN
+
+Failed!
+
+Failed Jobs:
+JobId	Alias	Feature	Message	Outputs
+job_201410151714_0012	abs_upper_diff,movies	MAP_ONLY	Message: Job failed! Error - # of failed Map Tasks exceeded allowed limit. FailedCount: 1. LastFailedTask: task_201410151714_0012_m_000000	hdfs://localhost:9000/user/peng/e-abs-upper-upper-results,
+
+Input(s):
+Failed to read data from "hdfs://localhost:9000/user/peng/dataset"
+
+Output(s):
+Failed to produce result in "hdfs://localhost:9000/user/peng/e-abs-upper-upper-results"
+
+Counters:
+Total records written : 0
+Total bytes written : 0
+Spillable Memory Manager spill count : 0
+Total bags proactively spilled: 0
+Total records proactively spilled: 0
+
+Job DAG:
+job_201410151714_0012
+
+
+2014-10-15 22:25:28,835 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - Failed!
+2014-10-15 22:25:28,858 [main] ERROR org.apache.pig.tools.grunt.GruntParser - ERROR 0: Exception while executing [POUserFunc (Name: POUserFunc(org.apache.pig.builtin.IntAbs)[int] - scope-5 Operator Key: scope-5) children: null at []]: java.lang.NullPointerException
+Details at logfile: /home/peng/workspace/ProvErr/new-Group1/pig_1413426288527.log

@@ -1,0 +1,97 @@
+2014-10-15 22:22:38,908 [main] INFO  org.apache.pig.Main - Apache Pig version 0.12.0 (r1529718) compiled Oct 07 2013, 12:20:14
+2014-10-15 22:22:38,908 [main] INFO  org.apache.pig.Main - Logging error messages to: /home/peng/workspace/ProvErr/new-Group1/pig_1413426158907.log
+2014-10-15 22:22:39,189 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://localhost:9000
+2014-10-15 22:22:39,548 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to map-reduce job tracker at: localhost:9001
+2014-10-15 22:22:40,190 [main] WARN  org.apache.pig.PigServer - Encountered Warning IMPLICIT_CAST_TO_CHARARRAY 1 time(s).
+2014-10-15 22:22:40,190 [main] WARN  org.apache.pig.PigServer - Encountered Warning USING_OVERLOADED_FUNCTION 1 time(s).
+2014-10-15 22:22:40,190 [main] WARN  org.apache.pig.PigServer - Encountered Warning IMPLICIT_CAST_TO_INT 1 time(s).
+2014-10-15 22:22:40,250 [main] INFO  org.apache.pig.newplan.logical.optimizer.LogicalPlanOptimizer - {RULES_ENABLED=[AddForEach, ColumnMapKeyPrune, DuplicateForEachColumnRewrite, GroupByConstParallelSetter, ImplicitSplitInserter, LimitOptimizer, LoadTypeCastInserter, MergeFilter, MergeForEach, NewPartitionFilterOptimizer, PartitionFilterOptimizer, PushDownForEachFlatten, PushUpFilter, SplitFilter, StreamTypeCastInserter], RULES_DISABLED=[FilterLogicExpressionSimplifier]}
+2014-10-15 22:22:40,269 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for movies: $0, $2, $4
+#-----------------------------------------------
+# New Logical Plan:
+#-----------------------------------------------
+abs_upper_diff: (Name: LOStore Schema: diff#15:int,upperName#17:chararray)ColumnPrune:InputUids=[17, 15]ColumnPrune:OutputUids=[17, 15]
+|
+|---abs_upper_diff: (Name: LOForEach Schema: diff#15:int,upperName#17:chararray)ColumnPrune:InputUids=[2, 4]ColumnPrune:OutputUids=[17, 15]
+    |   |
+    |   (Name: LOGenerate[false,false] Schema: diff#15:int,upperName#17:chararray)ColumnPrune:InputUids=[2, 4]ColumnPrune:OutputUids=[17, 15]
+    |   |   |
+    |   |   (Name: UserFunc(org.apache.pig.correct.IntAbs) Type: int Uid: 15)
+    |   |   |
+    |   |   |---(Name: Subtract Type: int Uid: 14)
+    |   |       |
+    |   |       |---(Name: Cast Type: int Uid: 4)
+    |   |       |   |
+    |   |       |   |---rating:(Name: Project Type: bytearray Uid: 4 Input: 0 Column: (*))
+    |   |       |
+    |   |       |---(Name: Constant Type: int Uid: 13)
+    |   |   |
+    |   |   (Name: UserFunc(org.apache.pig.builtin.UPPER) Type: chararray Uid: 17)
+    |   |   |
+    |   |   |---(Name: Cast Type: chararray Uid: 2)
+    |   |       |
+    |   |       |---name:(Name: Project Type: bytearray Uid: 2 Input: 1 Column: (*))
+    |   |
+    |   |---(Name: LOInnerLoad[1] Schema: rating#4:bytearray)
+    |   |
+    |   |---(Name: LOInnerLoad[0] Schema: name#2:bytearray)
+    |
+    |---movies: (Name: LOLoad Schema: name#2:bytearray,rating#4:bytearray)ColumnPrune:RequiredColumns=[1, 3]ColumnPrune:InputUids=[2, 4]ColumnPrune:OutputUids=[2, 4]RequiredFields:[1, 3]
+
+#-----------------------------------------------
+# Physical Plan:
+#-----------------------------------------------
+abs_upper_diff: Store(hdfs://localhost:9000/user/peng/abs-upper-upper-results:PigStorage) - scope-12
+|
+|---abs_upper_diff: New For Each(false,false)[bag] - scope-11
+    |   |
+    |   POUserFunc(org.apache.pig.correct.IntAbs)[int] - scope-5
+    |   |
+    |   |---Subtract[int] - scope-4
+    |       |
+    |       |---Cast[int] - scope-2
+    |       |   |
+    |       |   |---Project[bytearray][1] - scope-1
+    |       |
+    |       |---Constant(3) - scope-3
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.UPPER)[chararray] - scope-9
+    |   |
+    |   |---Cast[chararray] - scope-8
+    |       |
+    |       |---Project[bytearray][0] - scope-7
+    |
+    |---movies: Load(hdfs://localhost:9000/user/peng/dataset:PigStorage(',')) - scope-0
+
+2014-10-15 22:22:40,364 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler - File concatenation threshold: 100 optimistic? false
+2014-10-15 22:22:40,384 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size before optimization: 1
+2014-10-15 22:22:40,384 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size after optimization: 1
+#--------------------------------------------------
+# Map Reduce Plan                                  
+#--------------------------------------------------
+MapReduce node scope-13
+Map Plan
+abs_upper_diff: Store(hdfs://localhost:9000/user/peng/abs-upper-upper-results:PigStorage) - scope-12
+|
+|---abs_upper_diff: New For Each(false,false)[bag] - scope-11
+    |   |
+    |   POUserFunc(org.apache.pig.correct.IntAbs)[int] - scope-5
+    |   |
+    |   |---Subtract[int] - scope-4
+    |       |
+    |       |---Cast[int] - scope-2
+    |       |   |
+    |       |   |---Project[bytearray][1] - scope-1
+    |       |
+    |       |---Constant(3) - scope-3
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.UPPER)[chararray] - scope-9
+    |   |
+    |   |---Cast[chararray] - scope-8
+    |       |
+    |       |---Project[bytearray][0] - scope-7
+    |
+    |---movies: Load(hdfs://localhost:9000/user/peng/dataset:PigStorage(',')) - scope-0--------
+Global sort: false
+----------------
+

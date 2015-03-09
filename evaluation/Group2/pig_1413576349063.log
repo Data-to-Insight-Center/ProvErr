@@ -1,0 +1,41 @@
+Backend error message during job submission
+-------------------------------------------
+org.apache.hadoop.mapred.FileAlreadyExistsException: Output directory hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/matched-names-results-9 already exists
+	at org.apache.hadoop.mapreduce.lib.output.FileOutputFormat.checkOutputSpecs(FileOutputFormat.java:137)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigOutputFormat.checkOutputSpecsHelper(PigOutputFormat.java:207)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigOutputFormat.checkOutputSpecs(PigOutputFormat.java:187)
+	at org.apache.hadoop.mapred.JobClient$2.run(JobClient.java:973)
+	at org.apache.hadoop.mapred.JobClient$2.run(JobClient.java:936)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Unknown Source)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1190)
+	at org.apache.hadoop.mapred.JobClient.submitJobInternal(JobClient.java:936)
+	at org.apache.hadoop.mapred.JobClient.submitJob(JobClient.java:910)
+	at org.apache.hadoop.mapred.jobcontrol.Job.submit(Job.java:378)
+	at org.apache.hadoop.mapred.jobcontrol.JobControl.startReadyJobs(JobControl.java:247)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.pig.backend.hadoop20.PigJobControl.mainLoopAction(PigJobControl.java:157)
+	at org.apache.pig.backend.hadoop20.PigJobControl.run(PigJobControl.java:134)
+	at java.lang.Thread.run(Unknown Source)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher$1.run(MapReduceLauncher.java:270)
+
+Pig Stack Trace
+---------------
+ERROR 2244: Job failed, hadoop does not return any error message
+
+org.apache.pig.backend.executionengine.ExecException: ERROR 2244: Job failed, hadoop does not return any error message
+	at org.apache.pig.tools.grunt.GruntParser.executeBatch(GruntParser.java:148)
+	at org.apache.pig.tools.grunt.GruntParser.parseStopOnError(GruntParser.java:202)
+	at org.apache.pig.tools.grunt.GruntParser.parseStopOnError(GruntParser.java:173)
+	at org.apache.pig.tools.grunt.Grunt.exec(Grunt.java:84)
+	at org.apache.pig.Main.run(Main.java:607)
+	at org.apache.pig.Main.main(Main.java:156)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:160)
+================================================================================

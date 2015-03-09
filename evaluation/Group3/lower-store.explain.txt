@@ -1,0 +1,68 @@
+which: no hadoop in (/home/iub_netkarma/pig-0.12.0/bin:/usr/local/bin:/bin:/usr/bin:/home/iub_netkarma/bin)
+Warning: $HADOOP_HOME is deprecated.
+
+2014-10-17 02:58:39,694 [main] INFO  org.apache.pig.Main - Apache Pig version 0.12.0 (r1529718) compiled Oct 07 2013, 12:20:14
+2014-10-17 02:58:39,695 [main] INFO  org.apache.pig.Main - Logging error messages to: /home/iub_netkarma/Group2/pig_1413514719689.log
+2014-10-17 02:58:40,178 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://planetlab2.acis.ufl.edu:14000
+2014-10-17 02:58:41,484 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to map-reduce job tracker at: planetlab2.acis.ufl.edu:14001
+2014-10-17 02:58:42,033 [main] WARN  org.apache.pig.tools.grunt.GruntParser - 'fs' statement is ignored while processing 'explain -script' or '-check'
+2014-10-17 02:58:43,715 [main] WARN  org.apache.pig.PigServer - Encountered Warning USING_OVERLOADED_FUNCTION 1 time(s).
+2014-10-17 02:58:43,715 [main] WARN  org.apache.pig.PigServer - Encountered Warning IMPLICIT_CAST_TO_CHARARRAY 1 time(s).
+2014-10-17 02:58:43,805 [main] INFO  org.apache.pig.newplan.logical.optimizer.LogicalPlanOptimizer - {RULES_ENABLED=[AddForEach, ColumnMapKeyPrune, DuplicateForEachColumnRewrite, GroupByConstParallelSetter, ImplicitSplitInserter, LimitOptimizer, LoadTypeCastInserter, MergeFilter, MergeForEach, NewPartitionFilterOptimizer, PartitionFilterOptimizer, PushDownForEachFlatten, PushUpFilter, SplitFilter, StreamTypeCastInserter], RULES_DISABLED=[FilterLogicExpressionSimplifier]}
+2014-10-17 02:58:43,831 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for movies: $0, $2, $3, $4
+#-----------------------------------------------
+# New Logical Plan:
+#-----------------------------------------------
+name_lower: (Name: LOStore Schema: org.apache.pig.builtin.lower_name_5#9:chararray)ColumnPrune:InputUids=[9]ColumnPrune:OutputUids=[9]
+|
+|---name_lower: (Name: LOForEach Schema: org.apache.pig.builtin.lower_name_5#9:chararray)ColumnPrune:InputUids=[2]ColumnPrune:OutputUids=[9]
+    |   |
+    |   (Name: LOGenerate[false] Schema: org.apache.pig.builtin.lower_name_5#9:chararray)ColumnPrune:InputUids=[2]ColumnPrune:OutputUids=[9]
+    |   |   |
+    |   |   (Name: UserFunc(org.apache.pig.builtin.LOWER) Type: chararray Uid: 9)
+    |   |   |
+    |   |   |---(Name: Cast Type: chararray Uid: 2)
+    |   |       |
+    |   |       |---name:(Name: Project Type: bytearray Uid: 2 Input: 0 Column: (*))
+    |   |
+    |   |---(Name: LOInnerLoad[0] Schema: name#2:bytearray)
+    |
+    |---movies: (Name: LOLoad Schema: name#2:bytearray)ColumnPrune:RequiredColumns=[1]ColumnPrune:InputUids=[2]ColumnPrune:OutputUids=[2]RequiredFields:[1]
+
+#-----------------------------------------------
+# Physical Plan:
+#-----------------------------------------------
+name_lower: Store(hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/lower-store-results:PigStorage) - scope-6
+|
+|---name_lower: New For Each(false)[bag] - scope-5
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.LOWER)[chararray] - scope-3
+    |   |
+    |   |---Cast[chararray] - scope-2
+    |       |
+    |       |---Project[bytearray][0] - scope-1
+    |
+    |---movies: Load(hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/dataset:PigStorage(',')) - scope-0
+
+2014-10-17 02:58:44,050 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler - File concatenation threshold: 100 optimistic? false
+2014-10-17 02:58:44,128 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size before optimization: 1
+2014-10-17 02:58:44,129 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size after optimization: 1
+#--------------------------------------------------
+# Map Reduce Plan                                  
+#--------------------------------------------------
+MapReduce node scope-7
+Map Plan
+name_lower: Store(hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/lower-store-results:PigStorage) - scope-6
+|
+|---name_lower: New For Each(false)[bag] - scope-5
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.LOWER)[chararray] - scope-3
+    |   |
+    |   |---Cast[chararray] - scope-2
+    |       |
+    |       |---Project[bytearray][0] - scope-1
+    |
+    |---movies: Load(hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/dataset:PigStorage(',')) - scope-0--------
+Global sort: false
+----------------
+

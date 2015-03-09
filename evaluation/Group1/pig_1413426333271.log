@@ -1,0 +1,64 @@
+Backend error message
+---------------------
+org.apache.pig.backend.executionengine.ExecException: ERROR 0: Exception while executing (Name: movies_group: Local Rearrange[tuple]{bytearray}(false) - scope-11 Operator Key: scope-11): org.apache.pig.backend.executionengine.ExecException: ERROR 2106: Error while computing concat in CONCAT
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.processInput(PhysicalOperator.java:289)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POLocalRearrange.getNextTuple(POLocalRearrange.java:263)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.runPipeline(PigGenericMapBase.java:282)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.map(PigGenericMapBase.java:277)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.map(PigGenericMapBase.java:64)
+	at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:145)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:364)
+	at org.apache.hadoop.mapred.Child$4.run(Child.java:255)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:415)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1190)
+	at org.apache.hadoop.mapred.Child.main(Child.java:249)
+Caused by: org.apache.pig.backend.executionengine.ExecException: ERROR 2106: Error while computing concat in CONCAT
+	at org.apache.pig.error.CONCAT.exec(Unknown Source)
+	at org.apache.pig.error.CONCAT.exec(Unknown Source)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNext(POUserFunc.java:330)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNextDataByteArray(POUserFunc.java:391)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.getNext(PhysicalOperator.java:313)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.processPlan(POForEach.java:378)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.getNextTuple(POForEach.java:298)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.processInput(PhysicalOperator.java:281)
+	... 12 more
+Caused by: java.lang.NullPointerException
+	at java.lang.System.arraycopy(Native Method)
+	at org.apache.pig.data.DataByteArray.append(DataByteArray.java:165)
+	at org.apache.pig.data.DataByteArray.append(DataByteArray.java:148)
+	... 20 more
+
+Pig Stack Trace
+---------------
+ERROR 2106: Error while computing concat in CONCAT
+
+org.apache.pig.backend.executionengine.ExecException: ERROR 0: Exception while executing (Name: movies_group: Local Rearrange[tuple]{bytearray}(false) - scope-11 Operator Key: scope-11): org.apache.pig.backend.executionengine.ExecException: ERROR 2106: Error while computing concat in CONCAT
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.processInput(PhysicalOperator.java:289)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POLocalRearrange.getNextTuple(POLocalRearrange.java:263)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.runPipeline(PigGenericMapBase.java:282)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.map(PigGenericMapBase.java:277)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.map(PigGenericMapBase.java:64)
+	at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:145)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:364)
+	at org.apache.hadoop.mapred.Child$4.run(Child.java:255)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:415)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1190)
+	at org.apache.hadoop.mapred.Child.main(Child.java:249)
+Caused by: org.apache.pig.backend.executionengine.ExecException: ERROR 2106: Error while computing concat in CONCAT
+	at org.apache.pig.error.CONCAT.exec(Unknown Source)
+	at org.apache.pig.error.CONCAT.exec(Unknown Source)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNext(POUserFunc.java:330)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNextDataByteArray(POUserFunc.java:391)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.getNext(PhysicalOperator.java:313)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.processPlan(POForEach.java:378)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.getNextTuple(POForEach.java:298)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.processInput(PhysicalOperator.java:281)
+Caused by: java.lang.NullPointerException
+	at java.lang.System.arraycopy(Native Method)
+	at org.apache.pig.data.DataByteArray.append(DataByteArray.java:165)
+	at org.apache.pig.data.DataByteArray.append(DataByteArray.java:148)
+================================================================================

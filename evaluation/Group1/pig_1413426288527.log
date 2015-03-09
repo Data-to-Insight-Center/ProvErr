@@ -1,0 +1,51 @@
+Backend error message
+---------------------
+org.apache.pig.backend.executionengine.ExecException: ERROR 0: Exception while executing [POUserFunc (Name: POUserFunc(org.apache.pig.builtin.IntAbs)[int] - scope-5 Operator Key: scope-5) children: null at []]: java.lang.NullPointerException
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.getNext(PhysicalOperator.java:338)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.processPlan(POForEach.java:378)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.getNextTuple(POForEach.java:298)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.runPipeline(PigGenericMapBase.java:282)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.map(PigGenericMapBase.java:277)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.map(PigGenericMapBase.java:64)
+	at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:145)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:364)
+	at org.apache.hadoop.mapred.Child$4.run(Child.java:255)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:415)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1190)
+	at org.apache.hadoop.mapred.Child.main(Child.java:249)
+Caused by: java.lang.NullPointerException
+	at org.apache.pig.builtin.IntAbs.exec(IntAbs.java:50)
+	at org.apache.pig.builtin.IntAbs.exec(IntAbs.java:33)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNext(POUserFunc.java:330)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNextInteger(POUserFunc.java:379)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.getNext(PhysicalOperator.java:321)
+	... 13 more
+
+Pig Stack Trace
+---------------
+ERROR 0: Exception while executing [POUserFunc (Name: POUserFunc(org.apache.pig.builtin.IntAbs)[int] - scope-5 Operator Key: scope-5) children: null at []]: java.lang.NullPointerException
+
+org.apache.pig.backend.executionengine.ExecException: ERROR 0: Exception while executing [POUserFunc (Name: POUserFunc(org.apache.pig.builtin.IntAbs)[int] - scope-5 Operator Key: scope-5) children: null at []]: java.lang.NullPointerException
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.getNext(PhysicalOperator.java:338)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.processPlan(POForEach.java:378)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POForEach.getNextTuple(POForEach.java:298)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.runPipeline(PigGenericMapBase.java:282)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.map(PigGenericMapBase.java:277)
+	at org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigGenericMapBase.map(PigGenericMapBase.java:64)
+	at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:145)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:364)
+	at org.apache.hadoop.mapred.Child$4.run(Child.java:255)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:415)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1190)
+	at org.apache.hadoop.mapred.Child.main(Child.java:249)
+Caused by: java.lang.NullPointerException
+	at org.apache.pig.builtin.IntAbs.exec(IntAbs.java:50)
+	at org.apache.pig.builtin.IntAbs.exec(IntAbs.java:33)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNext(POUserFunc.java:330)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.expressionOperators.POUserFunc.getNextInteger(POUserFunc.java:379)
+	at org.apache.pig.backend.hadoop.executionengine.physicalLayer.PhysicalOperator.getNext(PhysicalOperator.java:321)
+================================================================================

@@ -1,0 +1,67 @@
+which: no hadoop in (/home/iub_netkarma/pig-0.12.0/bin:/usr/local/bin:/bin:/usr/bin:/home/iub_netkarma/bin)
+Warning: $HADOOP_HOME is deprecated.
+
+2014-10-17 02:54:46,593 [main] INFO  org.apache.pig.Main - Apache Pig version 0.12.0 (r1529718) compiled Oct 07 2013, 12:20:14
+2014-10-17 02:54:46,593 [main] INFO  org.apache.pig.Main - Logging error messages to: /home/iub_netkarma/Group2/pig_1413514486590.log
+2014-10-17 02:54:47,102 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://planetlab2.acis.ufl.edu:14000
+2014-10-17 02:54:48,555 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to map-reduce job tracker at: planetlab2.acis.ufl.edu:14001
+2014-10-17 02:54:50,925 [main] INFO  org.apache.pig.newplan.logical.optimizer.LogicalPlanOptimizer - {RULES_ENABLED=[AddForEach, ColumnMapKeyPrune, DuplicateForEachColumnRewrite, GroupByConstParallelSetter, ImplicitSplitInserter, LimitOptimizer, LoadTypeCastInserter, MergeFilter, MergeForEach, NewPartitionFilterOptimizer, PartitionFilterOptimizer, PushDownForEachFlatten, PushUpFilter, SplitFilter, StreamTypeCastInserter], RULES_DISABLED=[FilterLogicExpressionSimplifier]}
+2014-10-17 02:54:50,969 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for movies: $0, $3, $4
+#-----------------------------------------------
+# New Logical Plan:
+#-----------------------------------------------
+movies_concat: (Name: LOStore Schema: #10:bytearray)ColumnPrune:InputUids=[10]ColumnPrune:OutputUids=[10]
+|
+|---movies_concat: (Name: LOForEach Schema: #10:bytearray)ColumnPrune:InputUids=[2, 3]ColumnPrune:OutputUids=[10]
+    |   |
+    |   (Name: LOGenerate[false] Schema: #10:bytearray)ColumnPrune:InputUids=[2, 3]ColumnPrune:OutputUids=[10]
+    |   |   |
+    |   |   (Name: UserFunc(org.apache.pig.error.CONCAT) Type: bytearray Uid: 10)
+    |   |   |
+    |   |   |---name:(Name: Project Type: bytearray Uid: 2 Input: 0 Column: (*))
+    |   |   |
+    |   |   |---year:(Name: Project Type: bytearray Uid: 3 Input: 1 Column: (*))
+    |   |
+    |   |---(Name: LOInnerLoad[0] Schema: name#2:bytearray)
+    |   |
+    |   |---(Name: LOInnerLoad[1] Schema: year#3:bytearray)
+    |
+    |---movies: (Name: LOLoad Schema: name#2:bytearray,year#3:bytearray)ColumnPrune:RequiredColumns=[1, 2]ColumnPrune:InputUids=[2, 3]ColumnPrune:OutputUids=[2, 3]RequiredFields:[1, 2]
+
+#-----------------------------------------------
+# Physical Plan:
+#-----------------------------------------------
+movies_concat: Store(hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/e-concat-store-results:PigStorage) - scope-7
+|
+|---movies_concat: New For Each(false)[bag] - scope-6
+    |   |
+    |   POUserFunc(org.apache.pig.error.CONCAT)[bytearray] - scope-3
+    |   |
+    |   |---Project[bytearray][0] - scope-1
+    |   |
+    |   |---Project[bytearray][1] - scope-2
+    |
+    |---movies: Load(hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/dataset:PigStorage(',')) - scope-0
+
+2014-10-17 02:54:51,181 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler - File concatenation threshold: 100 optimistic? false
+2014-10-17 02:54:51,268 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size before optimization: 1
+2014-10-17 02:54:51,268 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size after optimization: 1
+#--------------------------------------------------
+# Map Reduce Plan                                  
+#--------------------------------------------------
+MapReduce node scope-8
+Map Plan
+movies_concat: Store(hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/e-concat-store-results:PigStorage) - scope-7
+|
+|---movies_concat: New For Each(false)[bag] - scope-6
+    |   |
+    |   POUserFunc(org.apache.pig.error.CONCAT)[bytearray] - scope-3
+    |   |
+    |   |---Project[bytearray][0] - scope-1
+    |   |
+    |   |---Project[bytearray][1] - scope-2
+    |
+    |---movies: Load(hdfs://planetlab2.acis.ufl.edu:14000/user/iub_netkarma/dataset:PigStorage(',')) - scope-0--------
+Global sort: false
+----------------
+

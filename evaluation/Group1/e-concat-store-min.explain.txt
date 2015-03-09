@@ -1,0 +1,132 @@
+2014-10-15 22:25:30,648 [main] INFO  org.apache.pig.Main - Apache Pig version 0.12.0 (r1529718) compiled Oct 07 2013, 12:20:14
+2014-10-15 22:25:30,649 [main] INFO  org.apache.pig.Main - Logging error messages to: /home/peng/workspace/ProvErr/new-Group1/pig_1413426330647.log
+2014-10-15 22:25:30,797 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://localhost:9000
+2014-10-15 22:25:31,111 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to map-reduce job tracker at: localhost:9001
+2014-10-15 22:25:31,743 [main] INFO  org.apache.pig.newplan.logical.optimizer.LogicalPlanOptimizer - {RULES_ENABLED=[AddForEach, ColumnMapKeyPrune, DuplicateForEachColumnRewrite, GroupByConstParallelSetter, ImplicitSplitInserter, LimitOptimizer, LoadTypeCastInserter, MergeFilter, MergeForEach, NewPartitionFilterOptimizer, PartitionFilterOptimizer, PushDownForEachFlatten, PushUpFilter, SplitFilter, StreamTypeCastInserter], RULES_DISABLED=[FilterLogicExpressionSimplifier]}
+2014-10-15 22:25:31,774 [main] INFO  org.apache.pig.newplan.logical.rules.ColumnPruneVisitor - Columns pruned for movies: $0, $4
+#-----------------------------------------------
+# New Logical Plan:
+#-----------------------------------------------
+movies_min: (Name: LOStore Schema: #40:bag{#39:tuple(strId#21:bytearray)},#43:double)ColumnPrune:InputUids=[25, 28]ColumnPrune:OutputUids=[25, 28]
+|
+|---movies_min: (Name: LOForEach Schema: #40:bag{#39:tuple(strId#21:bytearray)},#43:double)
+    |   |
+    |   (Name: LOGenerate[false,false] Schema: #40:bag{#39:tuple(strId#21:bytearray)},#43:double)
+    |   |   |
+    |   |   (Name: Dereference Type: bag Uid: 40 Column:[0])
+    |   |   |
+    |   |   |---movies_concat:(Name: Project Type: bag Uid: 22 Input: 0 Column: (*))
+    |   |   |
+    |   |   (Name: UserFunc(org.apache.pig.builtin.MIN) Type: double Uid: 43)
+    |   |   |
+    |   |   |---(Name: Dereference Type: bag Uid: 42 Column:[1])
+    |   |       |
+    |   |       |---movies_concat:(Name: Project Type: bag Uid: 22 Input: 1 Column: (*))
+    |   |
+    |   |---movies_concat: (Name: LOInnerLoad[1] Schema: strId#21:bytearray,rating#4:bytearray)
+    |   |
+    |   |---movies_concat: (Name: LOInnerLoad[1] Schema: strId#21:bytearray,rating#4:bytearray)
+    |
+    |---movies_group: (Name: LOCogroup Schema: group#21:bytearray,movies_concat#22:bag{#34:tuple(strId#21:bytearray,rating#4:bytearray)})ColumnPrune:InputUids=[4, 21]ColumnPrune:OutputUids=[22]
+        |   |
+        |   strId:(Name: Project Type: bytearray Uid: 21 Input: 0 Column: 0)
+        |
+        |---movies_concat: (Name: LOForEach Schema: strId#21:bytearray,rating#4:bytearray)ColumnPrune:InputUids=[2, 3, 4]ColumnPrune:OutputUids=[21, 4]
+            |   |
+            |   (Name: LOGenerate[false,false] Schema: strId#21:bytearray,rating#4:bytearray)ColumnPrune:InputUids=[2, 3, 4]ColumnPrune:OutputUids=[21, 4]
+            |   |   |
+            |   |   (Name: UserFunc(org.apache.pig.error.CONCAT) Type: bytearray Uid: 21)
+            |   |   |
+            |   |   |---name:(Name: Project Type: bytearray Uid: 2 Input: 0 Column: (*))
+            |   |   |
+            |   |   |---year:(Name: Project Type: bytearray Uid: 3 Input: 1 Column: (*))
+            |   |   |
+            |   |   rating:(Name: Project Type: bytearray Uid: 4 Input: 2 Column: (*))
+            |   |
+            |   |---(Name: LOInnerLoad[0] Schema: name#2:bytearray)
+            |   |
+            |   |---(Name: LOInnerLoad[1] Schema: year#3:bytearray)
+            |   |
+            |   |---(Name: LOInnerLoad[2] Schema: rating#4:bytearray)
+            |
+            |---movies: (Name: LOLoad Schema: name#2:bytearray,year#3:bytearray,rating#4:bytearray)ColumnPrune:RequiredColumns=[1, 2, 3]ColumnPrune:InputUids=[2, 3, 4]ColumnPrune:OutputUids=[2, 3, 4]RequiredFields:[1, 2, 3]
+
+#-----------------------------------------------
+# Physical Plan:
+#-----------------------------------------------
+movies_min: Store(hdfs://localhost:9000/user/peng/e-concat-store-min-results:PigStorage) - scope-21
+|
+|---movies_min: New For Each(false,false)[bag] - scope-20
+    |   |
+    |   Project[bag][0] - scope-14
+    |   |
+    |   |---Project[bag][1] - scope-13
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.MIN)[double] - scope-18
+    |   |
+    |   |---Project[bag][1] - scope-17
+    |       |
+    |       |---Project[bag][1] - scope-16
+    |
+    |---movies_group: Package[tuple]{bytearray} - scope-10
+        |
+        |---movies_group: Global Rearrange[tuple] - scope-9
+            |
+            |---movies_group: Local Rearrange[tuple]{bytearray}(false) - scope-11
+                |   |
+                |   Project[bytearray][0] - scope-12
+                |
+                |---movies_concat: New For Each(false,false)[bag] - scope-8
+                    |   |
+                    |   POUserFunc(org.apache.pig.error.CONCAT)[bytearray] - scope-3
+                    |   |
+                    |   |---Project[bytearray][0] - scope-1
+                    |   |
+                    |   |---Project[bytearray][1] - scope-2
+                    |   |
+                    |   Project[bytearray][2] - scope-6
+                    |
+                    |---movies: Load(hdfs://localhost:9000/user/peng/dataset:PigStorage(',')) - scope-0
+
+2014-10-15 22:25:31,850 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MRCompiler - File concatenation threshold: 100 optimistic? false
+2014-10-15 22:25:31,875 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size before optimization: 1
+2014-10-15 22:25:31,875 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MultiQueryOptimizer - MR plan size after optimization: 1
+#--------------------------------------------------
+# Map Reduce Plan                                  
+#--------------------------------------------------
+MapReduce node scope-22
+Map Plan
+movies_group: Local Rearrange[tuple]{bytearray}(false) - scope-11
+|   |
+|   Project[bytearray][0] - scope-12
+|
+|---movies_concat: New For Each(false,false)[bag] - scope-8
+    |   |
+    |   POUserFunc(org.apache.pig.error.CONCAT)[bytearray] - scope-3
+    |   |
+    |   |---Project[bytearray][0] - scope-1
+    |   |
+    |   |---Project[bytearray][1] - scope-2
+    |   |
+    |   Project[bytearray][2] - scope-6
+    |
+    |---movies: Load(hdfs://localhost:9000/user/peng/dataset:PigStorage(',')) - scope-0--------
+Reduce Plan
+movies_min: Store(hdfs://localhost:9000/user/peng/e-concat-store-min-results:PigStorage) - scope-21
+|
+|---movies_min: New For Each(false,false)[bag] - scope-20
+    |   |
+    |   Project[bag][0] - scope-14
+    |   |
+    |   |---Project[bag][1] - scope-13
+    |   |
+    |   POUserFunc(org.apache.pig.builtin.MIN)[double] - scope-18
+    |   |
+    |   |---Project[bag][1] - scope-17
+    |       |
+    |       |---Project[bag][1] - scope-16
+    |
+    |---movies_group: Package[tuple]{bytearray} - scope-10--------
+Global sort: false
+----------------
+

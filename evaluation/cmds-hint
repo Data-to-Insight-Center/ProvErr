@@ -1,0 +1,8 @@
+//copy from local
+pig -e 'fs -copyFromLocal dataset .'
+pig -e 'fs -copyFromLocal dataset-clean .'
+//save explain results
+pig -e 'explain -script *.pig' &>*.explain.txt
+//save execution results
+pig *.pig &>*.out.txt
+
